@@ -3,6 +3,7 @@ package se.lexicon.exceptions.workshop.data_access;
 import java.util.List;
 import java.util.Random;
 
+import se.lexicon.exceptions.workshop.DuplicateNameException;
 import se.lexicon.exceptions.workshop.domain.Gender;
 import se.lexicon.exceptions.workshop.domain.Person;
 import se.lexicon.exceptions.workshop.fileIO.CSVReader_Writer;
@@ -61,11 +62,13 @@ public class NameService {
 	     * DuplicateNameException.
 	     * @param name
 	     */
-	    public void addFemaleFirstName(String name){
-	    	femaleFirstNames.add(name);
-	    	CSVReader_Writer.saveFemaleNames(femaleFirstNames);
-	    		
-	    }
+	    public void addFemaleFirstName(String name) throws DuplicateNameException{
+			if(!femaleFirstNames.contains(name)) {
+				femaleFirstNames.add(name);
+				CSVReader_Writer.saveFemaleNames(femaleFirstNames);
+			}
+			else throw new DuplicateNameException("Duplicate Name", 1, name);
+			}
 
 	    /**
 	     * Here you need to check if List<String> maleFirstNames already contains the name
@@ -73,9 +76,13 @@ public class NameService {
 	     * DuplicateNameException.
 	     * @param name
 	     */
-	    public void addMaleFirstName(String name){
-	    	maleFirstNames.add(name);
-	        CSVReader_Writer.saveMaleNames(maleFirstNames);
+	    public void addMaleFirstName(String name) throws DuplicateNameException{
+			if(!maleFirstNames.contains(name))
+			{
+				maleFirstNames.add(name);
+				CSVReader_Writer.saveMaleNames(maleFirstNames);
+			}
+			else throw new DuplicateNameException("Duplicate name", 2, name);
 	    }
 
 	    /**
@@ -84,11 +91,12 @@ public class NameService {
 	     * DuplicateNameException.
 	     * @param lastName
 	     */
-	    public void addLastName(String lastName){
-	    	lastNames.add(lastName);
-	        CSVReader_Writer.saveLastNames(lastNames);
+	    public void addLastName(String lastName) throws DuplicateNameException{
+			if(!lastNames.contains(lastName))
+			{
+				lastNames.add(lastName);
+				CSVReader_Writer.saveLastNames(lastNames);
+			}
+			else throw new DuplicateNameException("Duplicate Name", 3, lastName);
 	    }
-
-
-	
 }

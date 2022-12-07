@@ -9,7 +9,7 @@ import se.lexicon.exceptions.workshop.fileIO.CSVReader_Writer;
 
 public class Main {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, DuplicateNameException {
 		
 		List <String> maleFirstNames = CSVReader_Writer.getMaleFirstNames();
         List <String> femaleFirstNames = CSVReader_Writer.getFemaleFirstNames();
@@ -18,6 +18,8 @@ public class Main {
 
 
         NameService nameService = new NameService(maleFirstNames, femaleFirstNames,lastNames);
+
+        nameService.addFemaleFirstName("ishu");
 
 
         Person test = nameService.getNewRandomPerson();
