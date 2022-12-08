@@ -19,10 +19,10 @@ public class Main {
 
         NameService nameService = new NameService(maleFirstNames, femaleFirstNames,lastNames);
 
-        nameService.addFemaleFirstName("ishu");
-
 
         Person test = nameService.getNewRandomPerson();
+        Person person = nameService.getNewRandomPerson();
+        System.out.println(person);
         System.out.println(test);
 
 	}
